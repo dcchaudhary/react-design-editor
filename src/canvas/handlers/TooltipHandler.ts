@@ -2,12 +2,14 @@ import debounce from 'lodash/debounce';
 import ReactDOM from 'react-dom';
 import { FabricObject } from '../utils';
 import Handler from './Handler';
+import { createRoot } from 'react-dom/client';
 
 
 class TooltipHandler {
 	handler: Handler;
 	tooltipEl: HTMLDivElement;
 	target?: fabric.Object;
+	tooltipRoot: any;
 
 	constructor(handler: Handler) {
 		this.handler = handler;
@@ -61,7 +63,10 @@ class TooltipHandler {
 			}
 			tooltip.innerHTML = element;
 			this.tooltipEl.appendChild(tooltip);
-			ReactDOM.render(element, tooltip);
+			if (!this.tooltipRoot) {
+				this.tooltipRoot = createRoot(tooltip);
+			}
+			this.tooltipRoot.render(element);
 			this.tooltipEl.classList.remove('tooltip-hidden');
 			const zoom = this.handler.canvas.getZoom();
 			const { clientHeight } = this.tooltipEl;

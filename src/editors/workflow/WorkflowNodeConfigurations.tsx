@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Divider, Input } from 'antd';
+import { Divider, Input } from 'antd';
+import { Form } from '@ant-design/compatible';
 import i18n from 'i18next';
 import NodeDescriptor from './configuration/NodeDescriptor';
 import NodeAction from './configuration/NodeAction';
@@ -8,7 +9,7 @@ import NodeConfiguration from './configuration/NodeConfiguration';
 import { Canvas } from '../../canvas';
 import { Scrollbar } from '../../components/common';
 import { Flex } from '../../components/flex';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 
 interface IProps extends FormComponentProps {
 	canvasRef?: Canvas;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Form, Radio } from 'antd';
+import { Modal, Radio } from 'antd';
+import { Form } from '@ant-design/compatible';
 import i18n from 'i18next';
 
 import { InputHtml } from '.';

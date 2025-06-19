@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Form, Input } from 'antd';
+import { Modal, Input } from 'antd';
+import { Form } from '@ant-design/compatible';
 import i18n from 'i18next';
 
 import Canvas from '../../../canvas/Canvas';

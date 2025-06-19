@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Divider, Form, Input, Switch } from 'antd';
+import { Divider, Input, Switch } from 'antd';
+import { Form } from '@ant-design/compatible';
 import i18n from 'i18next';
 import WorkflowSiderContainer from './WorkflowSiderContainer';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 import { CommonButton } from '../../components/common';
 
 interface IProps extends FormComponentProps {

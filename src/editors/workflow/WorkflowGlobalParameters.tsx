@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import i18n from 'i18next';
 import PropTypes from 'prop-types';
-import { List, Divider, Modal, Form, Input, Select, InputNumber, Switch } from 'antd';
+import { List, Divider, Modal, Input, Select, InputNumber, Switch } from 'antd';
+import { Form } from '@ant-design/compatible';
 import ReactJson from 'react-json-view';
 import WorkflowSiderContainer from './WorkflowSiderContainer';
 import { CommonButton, InputJson } from '../../components/common';
 import { Flex } from '../../components/flex';
-import { FormComponentProps } from 'antd/lib/form';
+import { FormComponentProps } from '@ant-design/compatible/es/form';
 
 interface IProps extends FormComponentProps {
 	workflow?: any;

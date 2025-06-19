@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Collapse, List } from 'antd';
+import { Collapse, List } from 'antd';
+import { Form } from '@ant-design/compatible';
 
 import PropertyDefinition from './PropertyDefinition';
 import Scrollbar from '../../../components/common/Scrollbar';
