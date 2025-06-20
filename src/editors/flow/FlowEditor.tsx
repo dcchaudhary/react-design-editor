@@ -6,7 +6,7 @@ import { Canvas, CanvasInstance } from '../../canvas';
 import { NodeObject } from '../../canvas/objects/Node';
 import { Content } from '../../components/layout';
 import { FlowContext } from '../../contexts';
-import Descriptors from '../workflow/Descriptors.json';
+import Descriptors from './Descriptors.json';
 import Links from './link';
 import Nodes from './node';
 

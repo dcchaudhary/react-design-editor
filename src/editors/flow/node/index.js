@@ -8,7 +8,12 @@ import TriggerNode from './trigger/TriggerNode';
 import FilterNode from './logic/FilterNode';
 import SwitchNode from './logic/SwitchNode';
 import VirtualButtonNode from './trigger/VirtualButtonNode';
-import { getNode } from '../../workflow/configuration/NodeConfiguration';
+
+// Local getNode function to replace workflow dependency
+const getNode = nodeClazz => {
+	const classPath = nodeClazz.split('.');
+	return classPath[classPath.length - 1];
+};
 
 const defaultOption = {
 	fill: 'rgba(0, 0, 0, 0.3)',
@@ -97,3 +102,5 @@ export default descriptors => {
 		);
 	}, {});
 };
+
+export { getNode };

@@ -3,8 +3,8 @@ import { Component } from 'react';
 import { v4 as uuid } from 'uuid';
 import { NODE_COLORS } from '../../canvas/objects/Node';
 import Icon from '../../components/icon/Icon';
-import Descriptors from '../workflow/Descriptors.json';
-import { getNode } from '../workflow/configuration/NodeConfiguration';
+import Descriptors from './Descriptors.json';
+import { getNode } from './node';
 
 interface IProps {
 	canvas: Canvas;

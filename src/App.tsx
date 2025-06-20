@@ -2,17 +2,17 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Title from './components/layout/Title';
 import FlowContainer from './containers/FlowContainer';
-import { FiberEditor, FlowEditor, HexGridEditor, ImageMapEditor, WorkflowEditor } from './editors';
+import { FiberEditor, FlowEditor, HexGridEditor, ImageMapEditor } from './editors';
 
-type EditorType = 'imagemap' | 'workflow' | 'flow' | 'hexgrid' | 'fiber';
+type EditorType = 'imagemap' | 'flow' | 'hexgrid' | 'fiber';
 
 interface IState {
-	activeEditor?: EditorType;
+	activeEditor: EditorType;
 }
 
 class App extends React.Component<any, IState> {
 	state: IState = {
-		activeEditor: 'workflow',
+		activeEditor: 'imagemap',
 	};
 
 	handleChangeEditor = ({ key }) => {
@@ -25,8 +25,6 @@ class App extends React.Component<any, IState> {
 		switch (activeEditor) {
 			case 'imagemap':
 				return <ImageMapEditor />;
-			case 'workflow':
-				return <WorkflowEditor />;
 			case 'flow':
 				return <FlowEditor />;
 			case 'hexgrid':
@@ -51,16 +49,6 @@ class App extends React.Component<any, IState> {
 					<link rel="shortcut icon" href="./favicon.ico" />
 					<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" />
 					<title>React Design Editor</title>
-					<script async={true} src="https://www.googletagmanager.com/gtag/js?id=G-EH7WWSK514" />
-					<script>
-						{`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-EH7WWSK514');
-                        `}
-					</script>
-					<script async={true} src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
 				</Helmet>
 				<div className="rde-title">
 					<Title onChangeEditor={this.handleChangeEditor} currentEditor={activeEditor} />
