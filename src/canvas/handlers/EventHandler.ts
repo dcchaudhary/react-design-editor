@@ -2,7 +2,6 @@ import * as anime from 'animejs';
 import { fabric } from 'fabric';
 import { code } from '../constants';
 import { NodeObject } from '../objects/Node';
-import { VideoObject } from '../objects/Video';
 import { FabricEvent, FabricObject } from '../utils';
 import AbstractHandler from './AbstractHandler';
 
@@ -221,16 +220,12 @@ class EventHandler extends AbstractHandler {
 		}
 		// TODO...this.handler.guidelineHandler.scalingGuidelines(target);
 		if (target.superType === 'element') {
-			const { id, width, height } = target;
+			const { id } = target;
 			const el = this.handler.elementHandler.findById(id);
 			// update the element
 			this.handler.elementHandler.setScaleOrAngle(el, target);
 			this.handler.elementHandler.setSize(el, target);
 			this.handler.elementHandler.setPosition(el, target);
-			const video = target as VideoObject;
-			if (video.type === 'video' && video.player) {
-				video.player.setPlayerSize(width, height);
-			}
 		}
 	};
 
@@ -615,13 +610,8 @@ class EventHandler extends AbstractHandler {
 				});
 				obj.setCoords();
 				if (obj.superType === 'element') {
-					const video = obj as VideoObject;
-					const { width, height } = obj;
 					const el = this.handler.elementHandler.findById(id);
 					this.handler.elementHandler.setSize(el, obj);
-					if (video.player) {
-						video.player.setPlayerSize(width, height);
-					}
 					this.handler.elementHandler.setPosition(el, obj);
 				}
 			}

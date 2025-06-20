@@ -15,7 +15,6 @@ import TextProperty from './TextProperty';
 import TooltipProperty from './TooltipProperty';
 import TriggerProperty from './TriggerProperty';
 import UserProperty from './UserProperty';
-import VideoProperty from './VideoProperty';
 
 export default {
 	map: {
@@ -360,22 +359,12 @@ export default {
 			component: UserProperty,
 		},
 	},
-	video: {
-		general: {
-			title: 'General',
-			component: GeneralProperty,
-		},
-		video: {
-			title: 'Video',
-			component: VideoProperty,
-		},
-	},
 	element: {
 		general: {
 			title: 'General',
 			component: GeneralProperty,
 		},
-		video: {
+		element: {
 			title: 'Element',
 			component: ElementProperty,
 		},
@@ -385,7 +374,7 @@ export default {
 			title: 'General',
 			component: GeneralProperty,
 		},
-		video: {
+		iframe: {
 			title: 'Iframe',
 			component: IframeProperty,
 		},

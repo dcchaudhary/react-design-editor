@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import debounce from 'lodash/debounce';
 import { createRoot } from 'react-dom/client';
 

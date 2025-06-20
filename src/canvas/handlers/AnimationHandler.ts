@@ -332,7 +332,7 @@ class AnimationHandler {
 			console.warn('Not supported type.');
 			return null;
 		}
-		return animate(option);
+		return animate(option, {});
 	};
 }
 

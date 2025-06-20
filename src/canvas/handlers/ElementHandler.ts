@@ -1,14 +1,13 @@
 import { fabric } from 'fabric';
 
 import Handler from './Handler';
-import { VideoObject } from '../objects/Video';
 import { ChartObject } from '../objects/Chart';
-import { IframeObject } from '../objects/Iframe';
 import { ElementObject } from '../objects/Element';
+import { IframeObject } from '../objects/Iframe';
 
 export type ElementType = 'container' | 'script' | 'style';
 
-export type ElementObjectType = VideoObject | ChartObject | IframeObject | ElementObject;
+export type ElementObjectType = ChartObject | IframeObject | ElementObject;
 
 export interface ElementCode {
     html?: string;

@@ -1,6 +1,5 @@
 import { fabric } from 'fabric';
 
-import { VideoObject } from '../objects/Video';
 import { FabricObject } from '../utils';
 import type Handler from './Handler';
 
@@ -30,15 +29,12 @@ class ZoomHandler {
 		this.handler.canvas.zoomToPoint(point, zoomRatio);
 		this.handler.getObjects().forEach(obj => {
 			if (obj.superType === 'element') {
-				const { id, width, height, player } = obj as VideoObject;
+				const { id } = obj as any;
 				const el = this.handler.elementHandler.findById(id);
 				// update the element
 				this.handler.elementHandler.setScaleOrAngle(el, obj);
 				this.handler.elementHandler.setSize(el, obj);
 				this.handler.elementHandler.setPosition(el, obj);
-				if (player) {
-					player.setPlayerSize(width, height);
-				}
 			}
 		});
 		if (this.handler.onZoom) {

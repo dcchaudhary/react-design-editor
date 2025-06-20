@@ -175,7 +175,7 @@ class InternalCanvas extends Component<CanvasProps, IState> implements CanvasIns
 }
 
 const Canvas: React.FC<CanvasProps> = React.forwardRef<CanvasInstance, CanvasProps>((props, ref) => {
-	const canvasRef = useRef<InternalCanvas>();
+	const canvasRef = useRef<InternalCanvas>(null);
 	React.useImperativeHandle(ref, () => ({
 		handler: canvasRef.current.handler,
 		canvas: canvasRef.current.canvas,

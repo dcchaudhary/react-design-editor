@@ -61,7 +61,6 @@
 		"i18next": "^21.10.0",
 		"i18next-browser-languagedetector": "^6.1.6",
 		"lodash": "^4.17.10",
-		"mediaelement": "^4.2.9",
 		"prop-types": "^15.6.2",
 		"react": "18.3.0",
 		"react-ace": "^14.0.1",

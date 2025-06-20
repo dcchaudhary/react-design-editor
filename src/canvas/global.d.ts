@@ -10,7 +10,6 @@ declare module 'fabric/fabric-impl' {
 	class Iframe {}
 	class Chart {}
 	class Element {}
-	class Video {}
 	// Node
 	class Node {}
 	// Link
@@ -48,16 +47,4 @@ declare global {
 		gifler: any;
 		adsbygoogle: any;
 	}
-}
-
-declare class MediaElementPlayer {
-	constructor(
-		id: string,
-		options: {
-			pauseOtherPlayers: boolean;
-			videoWidth: string;
-			videoHeight: string;
-			success: (mediaeElement: any, originalNode: any, instance: any) => void;
-		},
-	);
 }

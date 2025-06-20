@@ -27,7 +27,6 @@ const propertiesToInclude = [
 	'layout',
 	'workareaWidth',
 	'workareaHeight',
-	'videoLoadType',
 	'autoplay',
 	'shadow',
 	'muted',

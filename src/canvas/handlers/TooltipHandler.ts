@@ -1,5 +1,4 @@
 import debounce from 'lodash/debounce';
-import ReactDOM from 'react-dom';
 import { FabricObject } from '../utils';
 import Handler from './Handler';
 import { createRoot } from 'react-dom/client';

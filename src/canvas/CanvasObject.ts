@@ -13,7 +13,6 @@ import {
 	Link,
 	Node,
 	OrthogonalLink,
-	Video,
 } from './objects';
 import { Code } from './objects/Element';
 import Svg, { SvgOption } from './objects/Svg';
@@ -97,9 +96,6 @@ const CanvasObject: CanvasObjectSchema = {
 	},
 	iframe: {
 		create: ({ src, ...option }: { src: string }) => new Iframe(src, option),
-	},
-	video: {
-		create: ({ src, file, ...option }: { src: string; file: File }) => new Video(src || file, option),
 	},
 	gif: {
 		create: (option: any) => new Gif(option),

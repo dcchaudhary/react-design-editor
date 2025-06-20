@@ -431,7 +431,7 @@ class Handler implements HandlerOptions {
 		activeObject.set(key, value);
 		activeObject.setCoords();
 		this.canvas.requestRenderAll();
-		const { id, superType, type, player, width, height } = activeObject as any;
+		const { id, superType } = activeObject as any;
 		if (superType === 'element') {
 			if (key === 'visible') {
 				if (value) {
@@ -445,9 +445,6 @@ class Handler implements HandlerOptions {
 			this.elementHandler.setScaleOrAngle(el, activeObject);
 			this.elementHandler.setSize(el, activeObject);
 			this.elementHandler.setPosition(el, activeObject);
-			if (type === 'video' && player) {
-				player.setPlayerSize(width, height);
-			}
 		}
 		const { onModified } = this;
 		if (onModified) {
@@ -472,7 +469,7 @@ class Handler implements HandlerOptions {
 			}
 		});
 		this.canvas.requestRenderAll();
-		const { id, superType, type, player, width, height } = activeObject;
+		const { id, superType } = activeObject;
 		if (superType === 'element') {
 			if ('visible' in option) {
 				if (option.visible) {
@@ -486,9 +483,6 @@ class Handler implements HandlerOptions {
 			this.elementHandler.setScaleOrAngle(el, activeObject);
 			this.elementHandler.setSize(el, activeObject);
 			this.elementHandler.setPosition(el, activeObject);
-			if (type === 'video' && player) {
-				player.setPlayerSize(width, height);
-			}
 		}
 		const { onModified } = this;
 		if (onModified) {
@@ -517,7 +511,7 @@ class Handler implements HandlerOptions {
 		obj.set(key, value);
 		obj.setCoords();
 		this.canvas.renderAll();
-		const { id, superType, type, player, width, height } = obj as any;
+		const { id, superType } = obj as any;
 		if (superType === 'element') {
 			if (key === 'visible') {
 				if (value) {
@@ -531,9 +525,6 @@ class Handler implements HandlerOptions {
 			this.elementHandler.setScaleOrAngle(el, obj);
 			this.elementHandler.setSize(el, obj);
 			this.elementHandler.setPosition(el, obj);
-			if (type === 'video' && player) {
-				player.setPlayerSize(width, height);
-			}
 		}
 		const { onModified } = this;
 		if (onModified) {
@@ -572,7 +563,7 @@ class Handler implements HandlerOptions {
 		obj.set(option);
 		obj.setCoords();
 		this.canvas.renderAll();
-		const { id, superType, type, player, width, height } = obj as any;
+		const { id, superType } = obj as any;
 		if (superType === 'element') {
 			if ('visible' in option) {
 				if (option.visible) {
@@ -586,9 +577,6 @@ class Handler implements HandlerOptions {
 			this.elementHandler.setScaleOrAngle(el, obj);
 			this.elementHandler.setSize(el, obj);
 			this.elementHandler.setPosition(el, obj);
-			if (type === 'video' && player) {
-				player.setPlayerSize(width, height);
-			}
 		}
 	};
 

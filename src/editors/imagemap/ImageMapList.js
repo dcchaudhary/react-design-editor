@@ -86,8 +86,6 @@ class ImageMapList extends Component {
 							prefix = 'fab';
 						} else if (obj.type === 'iframe') {
 							icon = 'window-maximize';
-						} else if (obj.type === 'video') {
-							icon = 'video';
 						} else if (obj.type === 'svg') {
 							icon = 'bezier-curve';
 						} else {

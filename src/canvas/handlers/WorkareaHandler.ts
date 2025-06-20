@@ -2,7 +2,6 @@ import { fabric } from 'fabric';
 
 import { Handler } from '.';
 import { WorkareaLayout, WorkareaObject, FabricImage } from '../utils';
-import { VideoObject } from '../objects/Video';
 
 class WorkareaHandler {
 	handler: Handler;
@@ -57,17 +56,12 @@ class WorkareaHandler {
 			}
 		}
 		this.handler.getObjects().forEach(obj => {
-			const { id, player } = obj as VideoObject;
+			const { id } = obj;
 			if (id !== 'workarea') {
 				const objScaleX = !isFullscreen ? 1 : scaleX;
 				const objScaleY = !isFullscreen ? 1 : scaleY;
-				const objWidth = obj.width * objScaleX * canvas.getZoom();
-				const objHeight = obj.height * objScaleY * canvas.getZoom();
 				const el = this.handler.elementHandler.findById(obj.id);
 				this.handler.elementHandler.setSize(el, obj);
-				if (player) {
-					player.setPlayerSize(objWidth, objHeight);
-				}
 				obj.set({
 					scaleX: !isFullscreen ? 1 : objScaleX,
 					scaleY: !isFullscreen ? 1 : objScaleY,
@@ -144,7 +138,6 @@ class WorkareaHandler {
 				fabric.Image.fromURL(src, (img: any) => {
 					const { canvas, workarea, editable } = this.handler;
 					const { workareaWidth, workareaHeight } = workarea;
-					const { scaleX, scaleY } = this.calculateScale(img);
 					if (img._element) {
 						workarea.set({
 							...img,
@@ -163,16 +156,11 @@ class WorkareaHandler {
 					}
 					if (editable && !loaded) {
 						canvas.getObjects().forEach(obj => {
-							const { id, player } = obj as VideoObject;
+							const { id } = obj as any;
 							if (id !== 'workarea') {
-								const objWidth = obj.width * scaleX;
-								const objHeight = obj.height * scaleY;
 								const el = this.handler.elementHandler.findById(id);
 								this.handler.elementHandler.setScaleOrAngle(el, obj);
 								this.handler.elementHandler.setSize(el, obj);
-								if (player) {
-									player.setPlayerSize(objWidth, objHeight);
-								}
 								obj.set({
 									scaleX: 1,
 									scaleY: 1,
@@ -268,17 +256,12 @@ class WorkareaHandler {
 					if (editable && !loaded) {
 						const { layout } = workarea;
 						canvas.getObjects().forEach(obj => {
-							const { id, player } = obj as VideoObject;
+							const { id } = obj as any;
 							if (id !== 'workarea') {
 								scaleX = layout === 'fullscreen' ? scaleX : obj.scaleX;
 								scaleY = layout === 'fullscreen' ? scaleY : obj.scaleY;
 								const el = this.handler.elementHandler.findById(id);
 								this.handler.elementHandler.setSize(el, obj);
-								if (player) {
-									const objWidth = obj.width * scaleX;
-									const objHeight = obj.height * scaleY;
-									player.setPlayerSize(objWidth, objHeight);
-								}
 								obj.set({
 									scaleX,
 									scaleY,

@@ -16,5 +16,4 @@ export { default as OrthogonalLink } from './OrthogonalLink';
 export { default as Port } from './Port';
 export type { PortObject } from './Port';
 export { default as Svg } from './Svg';
-export { default as Video } from './Video';
 
