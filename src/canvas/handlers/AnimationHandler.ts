@@ -1,4 +1,5 @@
-import anime from 'animejs';
+import { animate } from 'animejs';
+import * as anime from 'animejs';
 import warning from 'warning';
 import { Handler } from '.';
 import { FabricObject } from '../utils';
@@ -22,7 +23,7 @@ class AnimationHandler {
 			return;
 		}
 		if (findObject.anime) {
-			findObject.anime.restart();
+			findObject.anime.restart?.();
 			return;
 		}
 		if (findObject.animation.type === 'none') {
@@ -38,7 +39,7 @@ class AnimationHandler {
 				hoverCursor: 'pointer',
 			});
 			this.handler.canvas.requestRenderAll();
-			instance.play();
+			instance.play?.();
 		}
 	};
 
@@ -52,7 +53,7 @@ class AnimationHandler {
 		if (!findObject) {
 			return;
 		}
-		findObject.anime.pause();
+		findObject.anime.pause?.();
 	};
 
 	/**
@@ -115,7 +116,7 @@ class AnimationHandler {
 				hoverCursor: 'pointer',
 			};
 		}
-		anime.remove(obj);
+		anime.utils.remove(obj);
 		const { type } = obj.animation;
 		if (type === 'fade') {
 			Object.assign(option, {
@@ -196,7 +197,7 @@ class AnimationHandler {
 	 */
 	getAnime = (obj: FabricObject, hasControls?: boolean) => {
 		const { delay = 0, duration = 100, autoplay = true, loop = true, type, ...other } = obj.animation;
-		const option: anime.AnimeParams = {
+		const option: any = {
 			targets: obj,
 			delay,
 			loop,
@@ -212,7 +213,7 @@ class AnimationHandler {
 				});
 				this.handler.canvas.requestRenderAll();
 			},
-			update: (instance: anime.AnimeInstance) => {
+			update: (instance: any) => {
 				if (type === 'flash') {
 					// I don't know why it works. Magic code...
 					warning(instance.animations[0], 'instance.animations[0] undefined.');
@@ -331,7 +332,7 @@ class AnimationHandler {
 			console.warn('Not supported type.');
 			return null;
 		}
-		return anime(option);
+		return animate(option);
 	};
 }
 

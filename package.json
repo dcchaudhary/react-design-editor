@@ -42,14 +42,13 @@
 	},
 	"homepage": "https://salgum1114.github.io/react-design-editor",
 	"peerDependencies": {
-		"animejs": "^3.0.0",
 		"fabric": "^4.6.0"
 	},
 	"dependencies": {
 		"@ant-design/compatible": "^5.1.4",
 		"@dagrejs/dagre": "^1.1.4",
 		"@flomon-ui/icons": "^0.0.69",
-		"animejs": "^3.0.0",
+		"animejs": "^4.0.2",
 		"antd": "^5.26.1",
 		"classnames": "^2.2.6",
 		"clsx": "^2.1.1",

@@ -1,4 +1,4 @@
-import anime from 'animejs';
+import * as anime from 'animejs';
 import { fabric } from 'fabric';
 import { code } from '../constants';
 import { NodeObject } from '../objects/Node';
@@ -94,7 +94,7 @@ class EventHandler extends AbstractHandler {
 			this.handler.getObjects().forEach(object => {
 				object.off('mousedown', this.handler.eventHandler.object.mousedown);
 				if (object.anime) {
-					anime.remove(object);
+					anime.utils.remove(object);
 				}
 			});
 		}

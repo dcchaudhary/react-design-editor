@@ -125,9 +125,9 @@ export type FabricObjectOption<T extends any = fabric.IObjectOptions> = T & {
 	animation?: AnimationProperty;
 	/**
 	 * Anime instance
-	 * @type {anime.AnimeInstance}
+	 * @type {any}
 	 */
-	anime?: anime.AnimeInstance;
+	anime?: any;
 	/**
 	 * Tooltip property
 	 * @type {TooltipProperty}
