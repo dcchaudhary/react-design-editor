@@ -75,15 +75,6 @@
 			"mouse-hover-enabled": "Hover enabled"
 		}
 	},
-	"flow": {
-		"flow": "플로우",
-		"list": "플로우 목록",
-		"editor": "플로우 에디터",
-		"info": "플로우 정보"
-	},
-	"hexgrid": {
-		"hexgrid": "HexGrid"
-	},
 	"action": {
 		"selection": "선택 모드(Q)",
 		"grab": "그랩 모드(W 혹은 Alt + 드래그)",
@@ -124,9 +115,6 @@
 		"pause": "일시 정지",
 		"stop": "중지",
 		"execute": "실행",
-		"go-github": "Github로 이동!!",
-		"go-docs": "Documents로 이동!!",
-		"shortcut-help": "단축키",
 		"run-layout": "레이아웃 정렬"
 	},
 	"common": {
@@ -177,35 +165,7 @@
 		"enter-property": "{{arg}}을(를) 입력하세요.",
 		"already-property": "{{arg}}가(이) 이미 존재합니다."
 	},
-	"shortcut": {
-		"q": "Selection",
-		"w": "Grab",
-		"plus": "Zoom In",
-		"minus": "Zoom Out",
-		"h": "Shortcut Help",
-		"escape": "Deselect",
-		"arrow-up": "Move Up",
-		"arrow-down": "Move Down",
-		"arrow-left": "Move Left",
-		"arrow-right": "Move Right",
-		"delete": "Delete",
-		"ctrl-a": "Select All",
-		"ctrl-c": "Copy",
-		"ctrl-v": "Paste",
-		"ctrl-x": "Cut",
-		"ctrl-z": "Undo",
-		"ctrl-y": "Redo",
-		"alt-mouse-left": "Grab",
-		"shfit-mouse-left": "Multi Selection",
-		"mouse-left": "Select",
-		"mouse-right": "Context Memu",
-		"o": "Zoom 1:1",
-		"p": "Zoom Fit"
-	},
 	"placeholder": {
 		"search-node": "Search a node"
-	},
-	"fiber": {
-		"fiber": "FiberCable"
 	}
 }

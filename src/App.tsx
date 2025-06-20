@@ -1,41 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Title from './components/layout/Title';
-import FlowContainer from './containers/FlowContainer';
-import { FiberEditor, FlowEditor, HexGridEditor, ImageMapEditor } from './editors';
+import { ImageMapEditor } from './editors';
 
-type EditorType = 'imagemap' | 'flow' | 'hexgrid' | 'fiber';
-
-interface IState {
-	activeEditor: EditorType;
-}
-
-class App extends React.Component<any, IState> {
-	state: IState = {
-		activeEditor: 'imagemap',
-	};
-
-	handleChangeEditor = ({ key }) => {
-		this.setState({
-			activeEditor: key,
-		});
-	};
-
-	renderEditor = (activeEditor: EditorType) => {
-		switch (activeEditor) {
-			case 'imagemap':
-				return <ImageMapEditor />;
-			case 'flow':
-				return <FlowEditor />;
-			case 'hexgrid':
-				return <HexGridEditor />;
-			case 'fiber':
-				return <FiberEditor />;
-		}
-	};
-
+class App extends React.Component {
 	render() {
-		const { activeEditor } = this.state;
 		return (
 			<div className="rde-main">
 				<Helmet>
@@ -50,12 +18,9 @@ class App extends React.Component<any, IState> {
 					<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" />
 					<title>React Design Editor</title>
 				</Helmet>
-				<div className="rde-title">
-					<Title onChangeEditor={this.handleChangeEditor} currentEditor={activeEditor} />
+				<div className="rde-content">
+					<ImageMapEditor />
 				</div>
-				<FlowContainer>
-					<div className="rde-content">{this.renderEditor(activeEditor)}</div>
-				</FlowContainer>
 			</div>
 		);
 	}
