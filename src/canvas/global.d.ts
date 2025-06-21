@@ -6,8 +6,6 @@ declare module 'fabric/fabric-impl' {
 	// Common
 	class Gif {}
 	class Arrow {}
-	// Element
-	class Element {}
 	// Node
 	class Node {}
 	// Link

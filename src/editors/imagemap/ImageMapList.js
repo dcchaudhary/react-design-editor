@@ -81,9 +81,6 @@ class ImageMapList extends Component {
 							icon = 'draw-polygon';
 						} else if (obj.type === 'line') {
 							icon = 'image';
-						} else if (obj.type === 'element') {
-							icon = 'html5';
-							prefix = 'fab';
 						} else if (obj.type === 'svg') {
 							icon = 'bezier-curve';
 						} else {

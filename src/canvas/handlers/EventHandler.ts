@@ -171,21 +171,12 @@ class EventHandler extends AbstractHandler {
 					const top = target.top + obj.top + target.height / 2;
 					if (obj.superType === 'node') {
 						this.handler.portHandler.setCoords({ ...obj, left, top });
-					} else if (obj.superType === 'element') {
-						const { id } = obj;
-						const el = this.handler.elementHandler.findById(id);
-						// TODO... Element object incorrect position
-						this.handler.elementHandler.setPositionByOrigin(el, obj, left, top);
 					}
 				});
 				return;
 			}
 			if (target.superType === 'node') {
 				this.handler.portHandler.setCoords(target);
-			} else if (target.superType === 'element') {
-				const { id } = target;
-				const el = this.handler.elementHandler.findById(id);
-				this.handler.elementHandler.setPosition(el, target);
 			}
 		}
 	};
@@ -201,11 +192,6 @@ class EventHandler extends AbstractHandler {
 		if (!this.handler.transactionHandler.active) {
 			this.handler.transactionHandler.save('moved');
 		}
-		if (target.superType === 'element') {
-			const { id } = target;
-			const el = this.handler.elementHandler.findById(id);
-			this.handler.elementHandler.setPosition(el, target);
-		}
 	};
 
 	/**
@@ -219,14 +205,6 @@ class EventHandler extends AbstractHandler {
 			this.handler.cropHandler.resize(opt);
 		}
 		// TODO...this.handler.guidelineHandler.scalingGuidelines(target);
-		if (target.superType === 'element') {
-			const { id } = target;
-			const el = this.handler.elementHandler.findById(id);
-			// update the element
-			this.handler.elementHandler.setScaleOrAngle(el, target);
-			this.handler.elementHandler.setSize(el, target);
-			this.handler.elementHandler.setPosition(el, target);
-		}
 	};
 
 	/**
@@ -247,12 +225,7 @@ class EventHandler extends AbstractHandler {
 	 */
 	public rotating = (opt: FabricEvent) => {
 		const { target } = opt as any;
-		if (target.superType === 'element') {
-			const { id } = target;
-			const el = this.handler.elementHandler.findById(id);
-			// update the element
-			this.handler.elementHandler.setScaleOrAngle(el, target);
-		}
+		// Element rotation handling removed
 	};
 
 	/**
@@ -422,9 +395,6 @@ class EventHandler extends AbstractHandler {
 			this.handler.canvas.requestRenderAll();
 		}
 		if (!this.handler.editable && event.target) {
-			if (event.target.superType === 'element') {
-				return;
-			}
 			if (event.target.id !== 'workarea') {
 				if (event.target !== this.handler.target) {
 					this.handler.tooltipHandler.show(event.target);
@@ -568,12 +538,6 @@ class EventHandler extends AbstractHandler {
 						top,
 					});
 					obj.setCoords();
-					if (obj.superType === 'element') {
-						const { id } = obj;
-						const el = this.handler.elementHandler.findById(id);
-						// update the element
-						this.handler.elementHandler.setPosition(el, obj);
-					}
 				}
 			});
 			this.handler.canvas.requestRenderAll();
@@ -609,11 +573,6 @@ class EventHandler extends AbstractHandler {
 					top,
 				});
 				obj.setCoords();
-				if (obj.superType === 'element') {
-					const el = this.handler.elementHandler.findById(id);
-					this.handler.elementHandler.setSize(el, obj);
-					this.handler.elementHandler.setPosition(el, obj);
-				}
 			}
 		});
 		this.handler.canvas.renderAll();

@@ -1,5 +1,4 @@
 import AnimationProperty from './AnimationProperty';
-import ElementProperty from './ElementProperty';
 import GeneralProperty from './GeneralProperty';
 import ImageFilterProperty from './ImageFilterProperty';
 import ImageProperty from './ImageProperty';
@@ -355,16 +354,6 @@ export default {
 		userProperty: {
 			title: 'User Property',
 			component: UserProperty,
-		},
-	},
-	element: {
-		general: {
-			title: 'General',
-			component: GeneralProperty,
-		},
-		element: {
-			title: 'Element',
-			component: ElementProperty,
 		},
 	},
 	svg: {

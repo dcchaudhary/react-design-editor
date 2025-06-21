@@ -177,24 +177,6 @@
 			}
 		}
 	],
-	"ELEMENT": [
-		{
-			"name": "Element",
-			"description": "",
-			"type": "element",
-			"icon": {
-				"prefix": "fab",
-				"name": "html5"
-			},
-			"option": {
-				"superType": "element",
-				"type": "element",
-				"width": 480,
-				"height": 270,
-				"name": "New element"
-			}
-		}
-	],
 	"SVG": [
 		{
 			"name": "Default",

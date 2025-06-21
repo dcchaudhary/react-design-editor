@@ -30,7 +30,6 @@ import ContextmenuHandler from './ContextmenuHandler';
 import CropHandler from './CropHandler';
 import CustomHandler from './CustomHandler';
 import DrawingHandler from './DrawingHandler';
-import ElementHandler from './ElementHandler';
 import EventHandler from './EventHandler';
 import GridHandler from './GridHandler';
 import GuidelineHandler from './GuidelineHandler';
@@ -256,7 +255,6 @@ class Handler implements HandlerOptions {
 	public onLoad?: (handler: Handler, canvas?: fabric.Canvas) => void;
 
 	public imageHandler: ImageHandler;
-	public elementHandler: ElementHandler;
 	public cropHandler: CropHandler;
 	public animationHandler: AnimationHandler;
 	public contextmenuHandler: ContextmenuHandler;
@@ -368,7 +366,6 @@ class Handler implements HandlerOptions {
 	public initHandler = () => {
 		this.workareaHandler = new WorkareaHandler(this);
 		this.imageHandler = new ImageHandler(this);
-		this.elementHandler = new ElementHandler(this);
 		this.cropHandler = new CropHandler(this);
 		this.animationHandler = new AnimationHandler(this);
 		this.contextmenuHandler = new ContextmenuHandler(this);
@@ -428,21 +425,6 @@ class Handler implements HandlerOptions {
 		activeObject.set(key, value);
 		activeObject.setCoords();
 		this.canvas.requestRenderAll();
-		const { id, superType } = activeObject as any;
-		if (superType === 'element') {
-			if (key === 'visible') {
-				if (value) {
-					activeObject.element.style.display = 'block';
-				} else {
-					activeObject.element.style.display = 'none';
-				}
-			}
-			const el = this.elementHandler.findById(id);
-			// update the element
-			this.elementHandler.setScaleOrAngle(el, activeObject);
-			this.elementHandler.setSize(el, activeObject);
-			this.elementHandler.setPosition(el, activeObject);
-		}
 		const { onModified } = this;
 		if (onModified) {
 			onModified(activeObject);
@@ -466,21 +448,6 @@ class Handler implements HandlerOptions {
 			}
 		});
 		this.canvas.requestRenderAll();
-		const { id, superType } = activeObject;
-		if (superType === 'element') {
-			if ('visible' in option) {
-				if (option.visible) {
-					activeObject.element.style.display = 'block';
-				} else {
-					activeObject.element.style.display = 'none';
-				}
-			}
-			const el = this.elementHandler.findById(id);
-			// update the element
-			this.elementHandler.setScaleOrAngle(el, activeObject);
-			this.elementHandler.setSize(el, activeObject);
-			this.elementHandler.setPosition(el, activeObject);
-		}
 		const { onModified } = this;
 		if (onModified) {
 			onModified(activeObject);
@@ -508,21 +475,6 @@ class Handler implements HandlerOptions {
 		obj.set(key, value);
 		obj.setCoords();
 		this.canvas.renderAll();
-		const { id, superType } = obj as any;
-		if (superType === 'element') {
-			if (key === 'visible') {
-				if (value) {
-					obj.element.style.display = 'block';
-				} else {
-					obj.element.style.display = 'none';
-				}
-			}
-			const el = this.elementHandler.findById(id);
-			// update the element
-			this.elementHandler.setScaleOrAngle(el, obj);
-			this.elementHandler.setSize(el, obj);
-			this.elementHandler.setPosition(el, obj);
-		}
 		const { onModified } = this;
 		if (onModified) {
 			onModified(obj);
@@ -560,20 +512,9 @@ class Handler implements HandlerOptions {
 		obj.set(option);
 		obj.setCoords();
 		this.canvas.renderAll();
-		const { id, superType } = obj as any;
-		if (superType === 'element') {
-			if ('visible' in option) {
-				if (option.visible) {
-					obj.element.style.display = 'block';
-				} else {
-					obj.element.style.display = 'none';
-				}
-			}
-			const el = this.elementHandler.findById(id);
-			// update the element
-			this.elementHandler.setScaleOrAngle(el, obj);
-			this.elementHandler.setSize(el, obj);
-			this.elementHandler.setPosition(el, obj);
+		const { onModified } = this;
+		if (onModified) {
+			onModified(obj);
 		}
 	};
 
@@ -589,7 +530,10 @@ class Handler implements HandlerOptions {
 		}
 		activeObject.set('shadow', new fabric.Shadow(option));
 		this.canvas.requestRenderAll();
-		this.onModified?.(activeObject);
+		const { onModified } = this;
+		if (onModified) {
+			onModified(activeObject);
+		}
 	};
 
 	/**
@@ -711,13 +655,6 @@ class Handler implements HandlerOptions {
 		if (!activeObject) {
 			return;
 		}
-		if (activeObject.superType === 'element') {
-			if (visible) {
-				activeObject.element.style.display = 'block';
-			} else {
-				activeObject.element.style.display = 'none';
-			}
-		}
 		activeObject.set({
 			visible,
 		});
@@ -803,7 +740,7 @@ class Handler implements HandlerOptions {
 		}
 		this.canvas.add(createdObj);
 		this.objects = this.getObjects();
-		if (!editable && !(obj.superType === 'element')) {
+		if (!editable) {
 			createdObj.on('mousedown', this.eventHandler.object.mousedown);
 		}
 		if (createdObj.dblclick) {
@@ -900,9 +837,6 @@ class Handler implements HandlerOptions {
 		}
 		if (activeObject.type !== 'activeSelection') {
 			this.canvas.discardActiveObject();
-			if (activeObject.superType === 'element') {
-				this.elementHandler.removeById(activeObject.id);
-			}
 			if (activeObject.superType === 'link') {
 				this.linkHandler.remove(activeObject);
 			} else if (activeObject.superType === 'node') {
@@ -936,9 +870,7 @@ class Handler implements HandlerOptions {
 			}
 			this.canvas.discardActiveObject();
 			activeObjects.forEach((obj: any) => {
-				if (obj.superType === 'element') {
-					this.elementHandler.removeById(obj.id);
-				} else if (obj.superType === 'node') {
+				if (obj.superType === 'node') {
 					if (obj.toPort) {
 						if (obj.toPort.links.length) {
 							obj.toPort.links.forEach((link: any) => {
@@ -1754,14 +1686,12 @@ class Handler implements HandlerOptions {
 	 * @param {boolean} [includeWorkarea=false]
 	 */
 	public clear = (includeWorkarea = false) => {
-		const ids = this.canvas.getObjects().reduce((prev, curr: any) => {
-			if (curr.superType === 'element') {
+		const ids = this.objects.reduce((prev: string[], curr: any) => {
+			if (curr.id !== 'workarea') {
 				prev.push(curr.id);
-				return prev;
 			}
 			return prev;
 		}, []);
-		this.elementHandler.removeByIds(ids);
 		if (includeWorkarea) {
 			this.canvas.clear();
 			this.workarea = null;

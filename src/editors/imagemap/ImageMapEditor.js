@@ -187,10 +187,10 @@ class ImageMapEditor extends Component {
 			if (changedKey === 'file' || changedKey === 'src' || changedKey === 'code' || changedKey === 'svg') {
 				if (selectedItem.type === 'image') {
 					this.canvasRef.handler.setImageById(selectedItem.id, changedValue, true);
-				} else if (selectedItem.superType === 'element') {
-					this.canvasRef.handler.elementHandler.setById(selectedItem.id, changedValue);
 				} else if (selectedItem.superType === 'svg') {
 					this.canvasRef.handler.setSvg(selectedItem, changedValue);
+				} else if (selectedItem.superType === 'link') {
+					this.canvasRef.handler.linkHandler.setById(selectedItem.id, changedValue);
 				}
 				return;
 			}

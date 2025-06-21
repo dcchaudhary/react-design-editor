@@ -4,7 +4,6 @@ import {
 	Arrow,
 	Cube,
 	CurvedLink,
-	Element,
 	Gif,
 	Line,
 	LineLink,
@@ -12,7 +11,6 @@ import {
 	Node,
 	OrthogonalLink,
 } from './objects';
-import { Code } from './objects/Element';
 import Svg, { SvgOption } from './objects/Svg';
 import { FabricObject } from './utils';
 
@@ -67,9 +65,6 @@ const CanvasObject: CanvasObjectSchema = {
 	},
 	arrow: {
 		create: ({ points, ...option }: { points: any }) => new Arrow(points, option),
-	},
-	element: {
-		create: ({ code, ...option }: { code: Code }) => new Element(code, option),
 	},
 	gif: {
 		create: (option: any) => new Gif(option),

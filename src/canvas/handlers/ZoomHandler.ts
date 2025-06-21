@@ -27,16 +27,6 @@ class ZoomHandler {
 			zoomRatio = maxZoom / 100;
 		}
 		this.handler.canvas.zoomToPoint(point, zoomRatio);
-		this.handler.getObjects().forEach(obj => {
-			if (obj.superType === 'element') {
-				const { id } = obj as any;
-				const el = this.handler.elementHandler.findById(id);
-				// update the element
-				this.handler.elementHandler.setScaleOrAngle(el, obj);
-				this.handler.elementHandler.setSize(el, obj);
-				this.handler.elementHandler.setPosition(el, obj);
-			}
-		});
 		if (this.handler.onZoom) {
 			this.handler.onZoom(zoomRatio);
 		}
