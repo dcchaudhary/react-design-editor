@@ -1,5 +1,4 @@
 import AnimationProperty from './AnimationProperty';
-import ChartProperty from './ChartProperty';
 import ElementProperty from './ElementProperty';
 import GeneralProperty from './GeneralProperty';
 import ImageFilterProperty from './ImageFilterProperty';
@@ -404,16 +403,6 @@ export default {
 		userProperty: {
 			title: 'User Property',
 			component: UserProperty,
-		},
-	},
-	chart: {
-		general: {
-			title: 'General',
-			component: GeneralProperty,
-		},
-		chartOption: {
-			title: 'Chart Option',
-			component: ChartProperty,
 		},
 	},
 };

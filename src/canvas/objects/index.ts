@@ -1,6 +1,4 @@
 export { default as Arrow } from './Arrow';
-export { default as Chart } from './Chart';
-export type { ChartObject } from './Chart';
 export { default as CirclePort } from './CirclePort';
 export { default as Cube } from './Cube';
 export { default as CurvedLink } from './CurvedLink';

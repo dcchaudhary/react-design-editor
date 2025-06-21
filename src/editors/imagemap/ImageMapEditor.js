@@ -312,19 +312,6 @@ class ImageMapEditor extends Component {
 				this.canvasRef.handler.imageHandler.applyFilterByType(filterKey, changedValue[filterKey]);
 				return;
 			}
-			if (changedKey === 'chartOption') {
-				try {
-					const sandbox = new SandBox();
-					const compiled = sandbox.compile(changedValue);
-					const { animations, styles } = this.state;
-					const chartOption = compiled(3, animations, styles, selectedItem.userProperty);
-					selectedItem.setChartOptionStr(changedValue);
-					this.canvasRef.handler.elementHandler.setById(selectedItem.id, chartOption);
-				} catch (error) {
-					console.error(error);
-				}
-				return;
-			}
 			if (selectedItem.type === 'svg' && changedKey === 'fill') {
 				selectedItem.setFill(changedValue);
 			} else {

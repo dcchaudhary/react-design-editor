@@ -27,7 +27,7 @@ Try it out today - the project is being continually developed to support a varie
 -   [x] Code Editor with HTML / CSS / JS / Preview
 -   [x] Various interaction modes, including grasp, selection, ctrl + drag grab
 -   [x] Multiple layouts, with fixed, responsive, fullscreen and grid modes
--   [x] SVG, Chart and GIF elements
+-   [x] SVG and GIF elements
 -   [x] Undo/Redo support
 -   [ ] Wireframes - in development
 -   [ ] Multiple Map - in development

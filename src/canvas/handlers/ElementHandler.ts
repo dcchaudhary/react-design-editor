@@ -1,12 +1,11 @@
 import { fabric } from 'fabric';
 
 import Handler from './Handler';
-import { ChartObject } from '../objects/Chart';
 import { ElementObject } from '../objects/Element';
 
 export type ElementType = 'container' | 'script' | 'style';
 
-export type ElementObjectType = ChartObject | ElementObject;
+export type ElementObjectType = ElementObject;
 
 export interface ElementCode {
     html?: string;
