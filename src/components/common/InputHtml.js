@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce';
 import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/theme-github';
 
-class InputJson extends Component {
+class InputHtml extends Component {
 	static propTypes = {
 		defaultValue: PropTypes.string,
 		value: PropTypes.string,
@@ -93,4 +93,4 @@ class InputJson extends Component {
 	}
 }
 
-export default InputJson;
+export default InputHtml;
