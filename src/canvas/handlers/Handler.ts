@@ -1427,8 +1427,6 @@ class Handler implements HandlerOptions {
 				return false;
 			} else if (obj.superType === 'port') {
 				return false;
-			} else if (obj.superType === 'element') {
-				return false;
 			} else if (obj.locked) {
 				return false;
 			}
@@ -1534,9 +1532,6 @@ class Handler implements HandlerOptions {
 				const diffTop = top - prevTop;
 				obj.left += diffLeft;
 				obj.top += diffTop;
-			}
-			if (obj.superType === 'element') {
-				obj.id = uuid();
 			}
 			this.add(obj, false, true);
 			this.canvas.renderAll();

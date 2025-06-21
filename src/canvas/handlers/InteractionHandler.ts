@@ -140,14 +140,6 @@ class InteractionHandler {
 		const delta = new fabric.Point(e.movementX, e.movementY);
 		this.handler.canvas.relativePan(delta);
 		this.handler.canvas.requestRenderAll();
-		this.handler.objects.forEach(obj => {
-			if (obj.superType === 'element') {
-				const { id } = obj;
-				const el = this.handler.elementHandler.findById(id);
-				// update the element
-				this.handler.elementHandler.setPosition(el, obj);
-			}
-		});
 	};
 
 	/**
