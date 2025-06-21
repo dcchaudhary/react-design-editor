@@ -1,20 +1,41 @@
-import { Form, Radio } from 'antd';
+import { Form, Radio, Input } from 'antd';
 import i18n from 'i18next';
-import React from 'react';
+import React, { Component } from 'react';
 
 import FileUpload from '../../../components/common/FileUpload';
-import { InputHtml } from '../../../components/common';
 
-export default {
-	render(canvasRef, form, data) {
+const { TextArea } = Input;
+
+class SvgProperty extends Component {
+	state = {
+		loadType: 'file',
+	};
+
+	componentDidMount() {
+		const { data } = this.props;
+		if (data && data.loadType) {
+			this.setState({ loadType: data.loadType });
+		}
+	}
+
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		const { data } = nextProps;
+		if (data && data.loadType && data.loadType !== this.state.loadType) {
+			this.setState({ loadType: data.loadType });
+		}
+	}
+
+	handleChangeSvgType = (e) => {
+		this.setState({ loadType: e.target.value });
+	};
+
+	render() {
+		const { form, data } = this.props;
+		const { loadType } = this.state;
+		
 		if (!data) {
 			return null;
 		}
-		const loadType = data.loadType || 'file';
-		
-		const handleChangeSvgType = (e) => {
-			form.resetFields();
-		};
 		
 		return (
 			<React.Fragment>
@@ -22,7 +43,7 @@ export default {
 					{form.getFieldDecorator('loadType', {
 						initialValue: loadType,
 					})(
-						<Radio.Group onChange={handleChangeSvgType}>
+						<Radio.Group onChange={this.handleChangeSvgType}>
 							<Radio.Button value="file">{i18n.t('common.file')}</Radio.Button>
 							<Radio.Button value="svg">{i18n.t('common.svg')}</Radio.Button>
 						</Radio.Group>,
@@ -38,9 +59,22 @@ export default {
 								}),
 							},
 						],
-					})(loadType === 'svg' ? <InputHtml /> : <FileUpload accept=".svg" />)}
+					})(loadType === 'svg' ? 
+						<TextArea 
+							rows={8} 
+							placeholder="Enter SVG code here..."
+							style={{ fontFamily: 'monospace' }}
+						/> : 
+						<FileUpload accept=".svg" />
+					)}
 				</Form.Item>
 			</React.Fragment>
 		);
+	}
+}
+
+export default {
+	render(canvasRef, form, data) {
+		return <SvgProperty form={form} data={data} />;
 	},
 };
