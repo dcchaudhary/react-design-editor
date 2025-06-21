@@ -80,7 +80,6 @@ class ImageMapEditor extends Component {
 		loading: false,
 		progress: 0,
 		animations: [],
-		styles: [],
 		dataSources: [],
 		editing: false,
 		descriptors: {},
@@ -490,10 +489,9 @@ class ImageMapEditor extends Component {
 						}
 					};
 					reader.onload = e => {
-						const { objects, animations, styles, dataSources } = JSON.parse(e.target.result);
+						const { objects, animations, dataSources } = JSON.parse(e.target.result);
 						this.setState({
 							animations,
-							styles,
 							dataSources,
 						});
 						if (objects) {
@@ -537,11 +535,10 @@ class ImageMapEditor extends Component {
 				}
 				return true;
 			});
-			const { animations, styles, dataSources } = this.state;
+			const { animations, dataSources } = this.state;
 			const exportDatas = {
 				objects,
 				animations,
-				styles,
 				dataSources,
 			};
 			const anchorEl = document.createElement('a');
@@ -560,14 +557,6 @@ class ImageMapEditor extends Component {
 			}
 			this.setState({
 				animations,
-			});
-		},
-		onChangeStyles: styles => {
-			if (!this.state.editing) {
-				this.changeEditing(true);
-			}
-			this.setState({
-				styles,
 			});
 		},
 		onChangeDataSources: dataSources => {
@@ -607,7 +596,6 @@ class ImageMapEditor extends Component {
 			loading,
 			progress,
 			animations,
-			styles,
 			dataSources,
 			editing,
 			descriptors,
@@ -630,7 +618,6 @@ class ImageMapEditor extends Component {
 			onDownload,
 			onUpload,
 			onChangeAnimations,
-			onChangeStyles,
 			onChangeDataSources,
 			onSaveImage,
 		} = this.handlers;
@@ -750,10 +737,8 @@ class ImageMapEditor extends Component {
 					onChange={onChange}
 					selectedItem={selectedItem}
 					onChangeAnimations={onChangeAnimations}
-					onChangeStyles={onChangeStyles}
 					onChangeDataSources={onChangeDataSources}
 					animations={animations}
-					styles={styles}
 					dataSources={dataSources}
 				/>
 				<ImageMapPreview
