@@ -22,7 +22,7 @@ Try it out today - the project is being continually developed to support a varie
 -   [x] Image cropping, Image filters, alignment, alignment guides
 -   [x] Snap to grid, context menu, animation and video element
 -   [x] Various icons in icon picker and fonts from Google Fonts (20)
--   [x] HTML/CSS/JS Element, iFrame element
+-   [x] HTML/CSS/JS Element
 -   [x] Animation support, with Fade / Bounce / Shake / Scaling / Rotation / Flash effects
 -   [x] Code Editor with HTML / CSS / JS / Preview
 -   [x] Various interaction modes, including grasp, selection, ctrl + drag grab

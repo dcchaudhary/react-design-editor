@@ -7,7 +7,6 @@ import {
 	CurvedLink,
 	Element,
 	Gif,
-	Iframe,
 	Line,
 	LineLink,
 	Link,
@@ -93,9 +92,6 @@ const CanvasObject: CanvasObjectSchema = {
 	},
 	element: {
 		create: ({ code, ...option }: { code: Code }) => new Element(code, option),
-	},
-	iframe: {
-		create: ({ src, ...option }: { src: string }) => new Iframe(src, option),
 	},
 	gif: {
 		create: (option: any) => new Gif(option),

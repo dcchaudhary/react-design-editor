@@ -3,11 +3,10 @@ import { fabric } from 'fabric';
 import Handler from './Handler';
 import { ChartObject } from '../objects/Chart';
 import { ElementObject } from '../objects/Element';
-import { IframeObject } from '../objects/Iframe';
 
 export type ElementType = 'container' | 'script' | 'style';
 
-export type ElementObjectType = ChartObject | IframeObject | ElementObject;
+export type ElementObjectType = ChartObject | ElementObject;
 
 export interface ElementCode {
     html?: string;

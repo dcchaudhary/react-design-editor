@@ -209,22 +209,6 @@
 				"height": 270,
 				"name": "New element"
 			}
-		},
-		{
-			"name": "Iframe",
-			"description": "",
-			"type": "element",
-			"icon": {
-				"prefix": "fas",
-				"name": "window-maximize"
-			},
-			"option": {
-				"superType": "element",
-				"type": "iframe",
-				"width": 480,
-				"height": 270,
-				"name": "New iframe"
-			}
 		}
 	],
 	"SVG": [

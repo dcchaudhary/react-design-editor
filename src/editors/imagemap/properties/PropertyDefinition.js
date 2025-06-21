@@ -2,7 +2,6 @@ import AnimationProperty from './AnimationProperty';
 import ChartProperty from './ChartProperty';
 import ElementProperty from './ElementProperty';
 import GeneralProperty from './GeneralProperty';
-import IframeProperty from './IframeProperty';
 import ImageFilterProperty from './ImageFilterProperty';
 import ImageProperty from './ImageProperty';
 import LinkProperty from './LinkProperty';
@@ -367,16 +366,6 @@ export default {
 		element: {
 			title: 'Element',
 			component: ElementProperty,
-		},
-	},
-	iframe: {
-		general: {
-			title: 'General',
-			component: GeneralProperty,
-		},
-		iframe: {
-			title: 'Iframe',
-			component: IframeProperty,
 		},
 	},
 	svg: {

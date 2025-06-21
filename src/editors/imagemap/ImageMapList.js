@@ -84,8 +84,6 @@ class ImageMapList extends Component {
 						} else if (obj.type === 'element') {
 							icon = 'html5';
 							prefix = 'fab';
-						} else if (obj.type === 'iframe') {
-							icon = 'window-maximize';
 						} else if (obj.type === 'svg') {
 							icon = 'bezier-curve';
 						} else {
