@@ -29,16 +29,7 @@
 					content: '';
 				}
 				&-list {
-					&:hover {
-						.rde-canvas-list {
-							background: rgba(0, 0, 0, 0.05);
-							display: block;
-							z-index: 1;
-							-webkit-animation: slide-right 0.3s linear;
-							-moz-animation: slide-right 0.3s linear;
-							animation: slide-right 0.3s linear;
-						}
-					}
+					// Removed hover behavior
 				}
 				&-history {
 					flex: 1;
@@ -61,6 +52,14 @@
 					-webkit-box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
 					-moz-box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
 					box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
+					&.show {
+						background: rgba(0, 0, 0, 0.05);
+						display: block;
+						z-index: 1;
+						-webkit-animation: slide-right 0.3s linear;
+						-moz-animation: slide-right 0.3s linear;
+						animation: slide-right 0.3s linear;
+					}
 					&-actions {
 						border-bottom: 1px solid;
 					}

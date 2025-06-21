@@ -13,8 +13,19 @@ class ImageMapHeaderToolbar extends React.Component {
 		selectedItem: PropTypes.object,
 	};
 
+	state = {
+		showCanvasList: false,
+	};
+
+	toggleCanvasList = () => {
+		this.setState(prevState => ({
+			showCanvasList: !prevState.showCanvasList,
+		}));
+	};
+
 	render() {
 		const { canvasRef, selectedItem } = this.props;
+		const { showCanvasList } = this.state;
 		const isCropping = canvasRef ? canvasRef.handler?.interactionMode === 'crop' : false;
 		return (
 			<Flex className="rde-editor-header-toolbar-container" flex="1">
@@ -24,8 +35,9 @@ class ImageMapHeaderToolbar extends React.Component {
 						shape="circle"
 						icon="layer-group"
 						tooltipTitle={i18n.t('action.canvas-list')}
+						onClick={this.toggleCanvasList}
 					/>
-					<div className="rde-canvas-list">
+					<div className={`rde-canvas-list ${showCanvasList ? 'show' : ''}`}>
 						<ImageMapList canvasRef={canvasRef} selectedItem={selectedItem} />
 					</div>
 				</Flex.Item>
