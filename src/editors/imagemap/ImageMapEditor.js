@@ -258,6 +258,7 @@ class ImageMapEditor extends Component {
 			if (changedKey === 'filters') {
 				const filterKey = Object.keys(changedValue)[0];
 				const filterValue = allValues.filters[filterKey];
+				
 				if (filterKey === 'gamma') {
 					const rgb = [filterValue.r, filterValue.g, filterValue.b];
 					this.canvasRef.handler.imageHandler.applyFilterByType(filterKey, changedValue[filterKey].enabled, {
@@ -303,8 +304,27 @@ class ImageMapEditor extends Component {
 				}
 				if (filterKey === 'blur') {
 					this.canvasRef.handler.imageHandler.applyFilterByType(filterKey, changedValue[filterKey].enabled, {
-						value: filterValue.value,
+						blur: filterValue.value,
 					});
+					return;
+				}
+				if (filterKey === 'drop-shadow') {
+					const enabled = changedValue[filterKey].enabled;
+					const filterValue = changedValue[filterKey];
+					
+					if (enabled) {
+						this.canvasRef.handler.imageHandler.applyDropShadow(
+							true,
+							{
+								offsetX: filterValue.offsetX,
+								offsetY: filterValue.offsetY,
+								blur: filterValue.blur,
+								color: filterValue.color
+							}
+						);
+					} else {
+						this.canvasRef.handler.imageHandler.applyDropShadow(false);
+					}
 					return;
 				}
 				this.canvasRef.handler.imageHandler.applyFilterByType(filterKey, changedValue[filterKey]);

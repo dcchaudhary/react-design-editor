@@ -114,6 +114,9 @@ export const FILTER_TYPES = [
 	'mask',
 	'multiply',
 	'sepia2',
+	'gradient-transparency',
+	'color-matrix',
+	'remove-white',
 ];
 
 export const capitalize = (str: string) => (str ? str.charAt(0).toUpperCase() + str.slice(1) : false);
@@ -164,8 +167,10 @@ class ImageHandler {
 			//     return new fabric.Image.filters.Vintage();
 		} else if (type === 'pixelate') {
 			return new fabric.Image.filters.Pixelate(other);
-			// } else if (type === 'blur') {
-			//     return new fabric.Image.filters.Blur(other);
+		} else if (type === 'blur') {
+			return new (fabric.Image.filters as any).Blur({
+				blur: other.blur || other.value || 0
+			});
 		} else if (type === 'sharpen') {
 			return new fabric.Image.filters.Convolute({
 				matrix: SHARPEN_MATRIX,
@@ -188,8 +193,8 @@ class ImageHandler {
 			//     return new fabric.Image.filters.BlackWhite();
 		} else if (type === 'blend-image') {
 			return new fabric.Image.filters.BlendImage(other);
-			// } else if (type === 'hue') {
-			//     return new fabric.Image.filters.HueRotation(other);
+		} else if (type === 'hue') {
+			return new (fabric.Image.filters as any).HueRotation(other);
 		} else if (type === 'resize') {
 			return new fabric.Image.filters.Resize(other);
 		} else if (type === 'tint') {
@@ -205,6 +210,12 @@ class ImageHandler {
 			});
 		} else if (type === 'sepia2') {
 			return new fabric.Image.filters.Sepia2(other);
+		} else if (type === 'gradient-transparency') {
+			return new fabric.Image.filters.GradientTransparency(other);
+		} else if (type === 'color-matrix') {
+			return new fabric.Image.filters.ColorMatrix(other);
+		} else if (type === 'remove-white') {
+			return new fabric.Image.filters.RemoveWhite(other);
 		}
 		return false;
 	};
@@ -470,11 +481,11 @@ class ImageHandler {
 	 * @param {number} [value]
 	 * @param {fabric.Image} imageObj
 	 */
-	// public applyBlur = (blur = false, value?: number, imageObj?: fabric.Image): void => {
-	//     this.applyFilter(11, blur && new fabric.Image.filters.Blur(value ? {
-	//         value,
-	//     } : undefined), imageObj);
-	// }
+	public applyBlur = (blur = false, value?: number, imageObj?: fabric.Image): void => {
+		this.applyFilter(11, blur && new (fabric.Image.filters as any).Blur({
+			blur: value || 0
+		}), imageObj);
+	};
 
 	/**
 	 * Apply sharpen in image
@@ -590,11 +601,11 @@ class ImageHandler {
 	 * @param {HueRotationFilter} [value]
 	 * @param {fabric.Image} [imageObj]
 	 */
-	// public applyHue = (hue = false, value?: HueRotationFilter, imageObj?: fabric.Image): void => {
-	//     this.applyFilter(21, hue && new fabric.Image.filters.HueRotation(value ? {
-	//         rotation: value,
-	//     } : undefined), imageObj);
-	// }
+	public applyHue = (hue = false, value?: HueRotationFilter, imageObj?: fabric.Image): void => {
+		this.applyFilter(21, hue && new (fabric.Image.filters as any).HueRotation(value ? {
+			rotation: value,
+		} : undefined), imageObj);
+	};
 
 	/**
 	 * Apply resize in image
@@ -677,6 +688,29 @@ class ImageHandler {
 	 */
 	public applyRemoveWhite = (removeWhite = false, value?: RemoveWhiteFilter, imageObj?: fabric.Image): void => {
 		this.applyFilter(29, removeWhite && new fabric.Image.filters.RemoveWhite(value), imageObj);
+	};
+
+	/**
+	 * Apply drop shadow in image
+	 * @param {boolean} [dropShadow=false]
+	 * @param {object} [value]
+	 * @param {fabric.Image} [imageObj]
+	 */
+	public applyDropShadow = (dropShadow = false, value?: any, imageObj?: fabric.Image): void => {
+		const obj = imageObj || (this.handler.canvas.getActiveObject() as any);
+		
+		if (dropShadow && value) {
+			const shadowConfig = {
+				offsetX: value.offsetX || 5,
+				offsetY: value.offsetY || 5,
+				blur: value.blur || 5,
+				color: value.color || 'rgba(0,0,0,0.5)'
+			};
+			obj.set('shadow', shadowConfig);
+		} else {
+			obj.set('shadow', null);
+		}
+		this.handler.canvas.requestRenderAll();
 	};
 }
 

@@ -5,6 +5,204 @@ import Icon from '../../../components/icon/Icon';
 
 const { Title } = Typography;
 
+// Simple Drop Shadow Component
+const DropShadowComponent = ({ canvasRef }) => {
+    const [enabled, setEnabled] = React.useState(false);
+    const [offsetX, setOffsetX] = React.useState(5);
+    const [offsetY, setOffsetY] = React.useState(5);
+    const [blur, setBlur] = React.useState(5);
+    const [color, setColor] = React.useState('#000000');
+
+    const applyShadow = (isEnabled, shadowValues = {}) => {
+        if (canvasRef && canvasRef.handler) {
+            const obj = canvasRef.handler.canvas.getActiveObject();
+            if (obj) {
+                if (isEnabled) {
+                    obj.set('shadow', {
+                        offsetX: shadowValues.offsetX || offsetX,
+                        offsetY: shadowValues.offsetY || offsetY,
+                        blur: shadowValues.blur || blur,
+                        color: shadowValues.color || color
+                    });
+                } else {
+                    obj.set('shadow', null);
+                }
+                canvasRef.handler.canvas.requestRenderAll();
+            }
+        }
+    };
+
+    const handleSwitchChange = (checked) => {
+        setEnabled(checked);
+        applyShadow(checked);
+    };
+
+    const handleSliderChange = (value, type) => {
+        if (type === 'offsetX') setOffsetX(value);
+        if (type === 'offsetY') setOffsetY(value);
+        if (type === 'blur') setBlur(value);
+        
+        if (enabled) {
+            applyShadow(true, {
+                offsetX: type === 'offsetX' ? value : offsetX,
+                offsetY: type === 'offsetY' ? value : offsetY,
+                blur: type === 'blur' ? value : blur,
+                color: color
+            });
+        }
+    };
+
+    const handleColorChange = (e) => {
+        const newColor = e.target.value;
+        setColor(newColor);
+        
+        if (enabled) {
+            applyShadow(true, {
+                offsetX: offsetX,
+                offsetY: offsetY,
+                blur: blur,
+                color: newColor
+            });
+        }
+    };
+
+    return (
+        <Card size="small" style={{ marginBottom: 16 }}>
+            <Title level={5} style={{ marginBottom: 12, fontSize: 14 }}>
+                Drop Shadow
+            </Title>
+            <div className="filter-header">
+                <Icon name="cloud" className="filter-icon" />
+                <span className="filter-label">
+                    Drop Shadow
+                </span>
+                <Switch 
+                    size="small" 
+                    checked={enabled}
+                    onChange={handleSwitchChange}
+                />
+            </div>
+            
+            {/* Horizontal Offset */}
+            <div className="filter-slider" style={{ marginTop: 8 }}>
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    marginBottom: 4
+                }}>
+                    <span style={{ fontSize: '12px', color: enabled ? '#666' : '#ccc' }}>
+                        Horizontal Offset
+                    </span>
+                    <span style={{ fontSize: '11px', color: enabled ? '#999' : '#ccc' }}>
+                        {offsetX}
+                    </span>
+                </div>
+                <div style={{ padding: '0 8px' }}>
+                    <Slider
+                        disabled={!enabled}
+                        min={-100}
+                        max={100}
+                        step={1}
+                        value={offsetX}
+                        onChange={(value) => handleSliderChange(value, 'offsetX')}
+                    />
+                </div>
+            </div>
+            
+            {/* Vertical Offset */}
+            <div className="filter-slider" style={{ marginTop: 8 }}>
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    marginBottom: 4
+                }}>
+                    <span style={{ fontSize: '12px', color: enabled ? '#666' : '#ccc' }}>
+                        Vertical Offset
+                    </span>
+                    <span style={{ fontSize: '11px', color: enabled ? '#999' : '#ccc' }}>
+                        {offsetY}
+                    </span>
+                </div>
+                <div style={{ padding: '0 8px' }}>
+                    <Slider
+                        disabled={!enabled}
+                        min={-100}
+                        max={100}
+                        step={1}
+                        value={offsetY}
+                        onChange={(value) => handleSliderChange(value, 'offsetY')}
+                    />
+                </div>
+            </div>
+            
+            {/* Blur Radius */}
+            <div className="filter-slider" style={{ marginTop: 8 }}>
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    marginBottom: 4
+                }}>
+                    <span style={{ fontSize: '12px', color: enabled ? '#666' : '#ccc' }}>
+                        Blur Radius
+                    </span>
+                    <span style={{ fontSize: '11px', color: enabled ? '#999' : '#ccc' }}>
+                        {blur}
+                    </span>
+                </div>
+                <div style={{ padding: '0 8px' }}>
+                    <Slider
+                        disabled={!enabled}
+                        min={0}
+                        max={100}
+                        step={1}
+                        value={blur}
+                        onChange={(value) => handleSliderChange(value, 'blur')}
+                    />
+                </div>
+            </div>
+            
+            {/* Shadow Color */}
+            <div className="filter-slider" style={{ marginTop: 8 }}>
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    marginBottom: 4
+                }}>
+                    <span style={{ fontSize: '12px', color: enabled ? '#666' : '#ccc' }}>
+                        Shadow Color
+                    </span>
+                    <div style={{ 
+                        width: 20, 
+                        height: 20, 
+                        borderRadius: 3, 
+                        border: '1px solid #d9d9d9',
+                        opacity: enabled ? 1 : 0.5
+                    }}>
+                        <input 
+                            type="color" 
+                            style={{ 
+                                width: '100%', 
+                                height: '100%', 
+                                border: 'none', 
+                                borderRadius: 2,
+                                cursor: enabled ? 'pointer' : 'not-allowed',
+                                opacity: enabled ? 1 : 0.5
+                            }}
+                            value={color}
+                            onChange={handleColorChange}
+                            disabled={!enabled}
+                        />
+                    </div>
+                </div>
+            </div>
+        </Card>
+    );
+};
+
 export default {
     render(canvasRef, form, data) {
         const { getFieldDecorator } = form;
@@ -167,9 +365,9 @@ export default {
                 index: 11,
                 field: 'value',
                 min: 0,
-                max: 1,
-                step: 0.01,
-                defaultValue: 0.1
+                max: 3,
+                step: 0.1,
+                defaultValue: 0
             }
         ];
 
@@ -340,6 +538,9 @@ export default {
                         </div>
                     ))}
                 </Card>
+
+                {/* Drop Shadow Filter */}
+                <DropShadowComponent canvasRef={canvasRef} />
 
                 {/* Gamma Filter */}
                 <Card size="small">
