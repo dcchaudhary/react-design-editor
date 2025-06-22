@@ -16,70 +16,80 @@ export default {
                 label: i18n.t('imagemap.filter.grayscale'),
                 icon: 'adjust',
                 index: 0,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'color'
             },
             {
                 key: 'invert',
                 label: i18n.t('imagemap.filter.invert'),
                 icon: 'exchange-alt',
                 index: 1,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'color'
             },
             {
                 key: 'sepia',
                 label: i18n.t('imagemap.filter.sepia'),
                 icon: 'image',
                 index: 3,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'vintage'
             },
             {
                 key: 'brownie',
                 label: i18n.t('imagemap.filter.brownie'),
                 icon: 'coffee',
                 index: 4,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'vintage'
             },
             {
                 key: 'vintage',
                 label: i18n.t('imagemap.filter.vintage'),
                 icon: 'camera-retro',
                 index: 9,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'vintage'
             },
             {
                 key: 'blackwhite',
                 label: i18n.t('imagemap.filter.blackwhite'),
                 icon: 'circle',
                 index: 19,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'color'
             },
             {
                 key: 'technicolor',
                 label: i18n.t('imagemap.filter.technicolor'),
                 icon: 'palette',
                 index: 14,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'color'
             },
             {
                 key: 'polaroid',
                 label: i18n.t('imagemap.filter.polaroid'),
                 icon: 'camera',
                 index: 15,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'vintage'
             },
             {
                 key: 'sharpen',
                 label: i18n.t('imagemap.filter.sharpen'),
                 icon: 'cut',
                 index: 12,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'enhancement'
             },
             {
                 key: 'emboss',
                 label: i18n.t('imagemap.filter.emboss'),
                 icon: 'mountain',
                 index: 13,
-                type: 'toggle'
+                type: 'toggle',
+                category: 'enhancement'
             }
         ];
 
@@ -188,33 +198,111 @@ export default {
                     <Title level={5} style={{ marginBottom: 12, fontSize: 14 }}>
                         Quick Effects
                     </Title>
-                    <Row gutter={[8, 8]}>
-                        {filterConfigs.map(filter => (
-                            <Col span={8} key={filter.key}>
-                                <div className={`filter-toggle-item ${filters[filter.index] ? 'active' : ''}`}>
-                                    <div style={{ marginRight: 8 }}>
-                                        {getFieldDecorator(`filters.${filter.key}`, {
-                                            valuePropName: 'checked',
-                                            initialValue: !!filters[filter.index],
-                                        })(
-                                            <Switch size="small" />
-                                        )}
+                    <Row gutter={[12, 12]}>
+                        {filterConfigs.map(filter => {
+                            const getCategoryColor = (category) => {
+                                switch(category) {
+                                    case 'color': return '#1890ff';
+                                    case 'vintage': return '#722ed1';
+                                    case 'enhancement': return '#52c41a';
+                                    default: return '#666';
+                                }
+                            };
+                            
+                            const getCategoryIcon = (category) => {
+                                switch(category) {
+                                    case 'color': return 'palette';
+                                    case 'vintage': return 'camera-retro';
+                                    case 'enhancement': return 'magic';
+                                    default: return 'image';
+                                }
+                            };
+                            
+                            return (
+                                <Col span={24} key={filter.key}>
+                                    <div 
+                                        className={`filter-toggle-item ${filters[filter.index] ? 'active' : ''}`}
+                                        style={{
+                                            borderLeft: `4px solid ${getCategoryColor(filter.category)}`,
+                                            position: 'relative'
+                                        }}
+                                    >
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'space-between',
+                                            width: '100%',
+                                            gap: '12px'
+                                        }}>
+                                            <div style={{ 
+                                                display: 'flex', 
+                                                alignItems: 'center', 
+                                                flex: 1,
+                                                minWidth: 0
+                                            }}>
+                                                <div style={{
+                                                    position: 'relative',
+                                                    marginRight: '12px',
+                                                    flexShrink: 0
+                                                }}>
+                                                    <Icon 
+                                                        name={filter.icon} 
+                                                        className="filter-icon"
+                                                        style={{ 
+                                                            color: filters[filter.index] ? getCategoryColor(filter.category) : '#666',
+                                                            fontSize: '16px'
+                                                        }} 
+                                                    />
+                                                    <div style={{
+                                                        position: 'absolute',
+                                                        top: '-2px',
+                                                        right: '-2px',
+                                                        width: '8px',
+                                                        height: '8px',
+                                                        borderRadius: '50%',
+                                                        backgroundColor: getCategoryColor(filter.category),
+                                                        opacity: 0.6
+                                                    }} />
+                                                </div>
+                                                <div style={{ 
+                                                    display: 'flex', 
+                                                    flexDirection: 'column',
+                                                    flex: 1,
+                                                    minWidth: 0
+                                                }}>
+                                                    <span className="filter-label" style={{ 
+                                                        color: filters[filter.index] ? getCategoryColor(filter.category) : '#666',
+                                                        fontSize: '13px',
+                                                        fontWeight: '500',
+                                                        whiteSpace: 'nowrap',
+                                                        overflow: 'hidden',
+                                                        textOverflow: 'ellipsis'
+                                                    }}>
+                                                        {filter.label}
+                                                    </span>
+                                                    <span style={{
+                                                        fontSize: '10px',
+                                                        color: '#999',
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '0.5px'
+                                                    }}>
+                                                        {filter.category}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div style={{ flexShrink: 0 }}>
+                                                {getFieldDecorator(`filters.${filter.key}`, {
+                                                    valuePropName: 'checked',
+                                                    initialValue: !!filters[filter.index],
+                                                })(
+                                                    <Switch size="small" />
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <Icon 
-                                        name={filter.icon} 
-                                        className="filter-icon"
-                                        style={{ 
-                                            color: filters[filter.index] ? '#1890ff' : '#666'
-                                        }} 
-                                    />
-                                    <span className="filter-label" style={{ 
-                                        color: filters[filter.index] ? '#1890ff' : '#666'
-                                    }}>
-                                        {filter.label}
-                                    </span>
-                                </div>
-                            </Col>
-                        ))}
+                                </Col>
+                            );
+                        })}
                     </Row>
                 </Card>
 
