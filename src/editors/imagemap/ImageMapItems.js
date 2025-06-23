@@ -23,7 +23,7 @@ class ImageMapItems extends React.Component {
 
 	state = {
 		activeKey: [],
-		collapse: false,
+		collapse: true,
 		textSearch: '',
 		descriptors: {},
 		filteredDescriptors: [],

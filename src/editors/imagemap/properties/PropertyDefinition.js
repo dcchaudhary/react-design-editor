@@ -16,11 +16,11 @@ import UserProperty from './UserProperty';
 export default {
 	map: {
 		map: {
-			title: 'Map',
+			title: 'Canvas Settings',
 			component: MapProperty,
 		},
 		image: {
-			title: 'Image',
+			title: 'Background Image',
 			component: ImageProperty,
 		},
 	},
