@@ -8,6 +8,7 @@ import CommonButton from '../../components/common/CommonButton';
 import Scrollbar from '../../components/common/Scrollbar';
 import { Flex } from '../../components/flex';
 import Icon from '../../components/icon/Icon';
+import { Tooltip } from 'antd';
 
 notification.config({
 	top: 80,
@@ -220,8 +221,8 @@ class ImageMapItems extends React.Component {
 		</Flex>
 	);
 
-	renderItem = (item, centered) =>
-		item.type === 'drawing' ? (
+	renderItem = (item, centered) => {
+		const itemContent = item.type === 'drawing' ? (
 			<div
 				key={item.name}
 				draggable
@@ -250,6 +251,18 @@ class ImageMapItems extends React.Component {
 				{this.state.collapse ? null : <div className="rde-editor-items-item-text">{item.name}</div>}
 			</div>
 		);
+
+		// Add tooltip when collapsed
+		if (this.state.collapse) {
+			return (
+				<Tooltip key={item.name} title={item.name} placement="right">
+					{itemContent}
+				</Tooltip>
+			);
+		}
+
+		return itemContent;
+	};
 
 	render() {
 		const { descriptors } = this.props;
