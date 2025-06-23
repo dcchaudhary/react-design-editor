@@ -19,12 +19,12 @@ export default {
 						Font Settings
 					</Title>
 					<Row gutter={[12, 12]}>
-						<Col span={16}>
+						<Col span={24}>
 							<Form.Item label="Font Family" colon={false}>
 								{getFieldDecorator('fontFamily', {
 									initialValue: data.fontFamily,
 								})(
-									<Select>
+									<Select style={{ width: '100%' }}>
 										{Object.keys(fonts).map(font => {
 											return (
 												<Select.OptGroup key={font} label={font.toUpperCase()}>
@@ -40,7 +40,7 @@ export default {
 								)}
 							</Form.Item>
 						</Col>
-						<Col span={8}>
+						<Col span={24}>
 							<Form.Item label="Font Size" colon={false}>
 								{getFieldDecorator('fontSize', {
 									initialValue: data.fontSize || '32',
