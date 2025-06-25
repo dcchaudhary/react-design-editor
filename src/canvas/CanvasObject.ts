@@ -4,7 +4,6 @@ import {
 	Arrow,
 	Cube,
 	CurvedLink,
-	Gif,
 	Line,
 	LineLink,
 	Link,
@@ -65,9 +64,6 @@ const CanvasObject: CanvasObjectSchema = {
 	},
 	arrow: {
 		create: ({ points, ...option }: { points: any }) => new Arrow(points, option),
-	},
-	gif: {
-		create: (option: any) => new Gif(option),
 	},
 	node: {
 		create: (option: any) => new Node(option),

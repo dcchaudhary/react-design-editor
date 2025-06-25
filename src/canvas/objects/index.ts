@@ -2,7 +2,6 @@ export { default as Arrow } from './Arrow';
 export { default as CirclePort } from './CirclePort';
 export { default as Cube } from './Cube';
 export { default as CurvedLink } from './CurvedLink';
-export { default as Gif } from './Gif';
 export { default as Line } from './Line';
 export { default as LineLink } from './LineLink';
 export type { LineLinkObject } from './LineLink';
